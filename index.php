@@ -7,17 +7,17 @@
 
     $router = new Router();
 
-    echo '<pre>';
-    print_r($router->getUri());
-    echo '</pre>';
+    //echo '<pre>';
+    //print_r($router->getUri());
+    //echo '</pre>';
 
     $controlador = $router->getController();
     $metodo = $router->getMethod();
     $parametro = $router->getParam();
 
-    echo 'Controlador: ' . $controlador . '</br>';
-    echo 'Metodo: '. $metodo .'</br>';
-    echo 'Parametro: '.$parametro.'</br>';
+    //echo 'Controlador: ' . $controlador . '</br>';
+    //echo 'Metodo: '. $metodo .'</br>';
+    //echo 'Parametro: '.$parametro.'</br>';
 
     require PATH_CONTROLLERS . "{$controlador}/{$controlador}Controller.php";
 
