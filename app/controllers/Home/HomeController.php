@@ -1,21 +1,31 @@
-<?php 
+<?php 	
 
-/**
- * 
- */
+require_once PATH_MODELS . 'Home/HomeModel.php';
+
 class HomeController extends Controller{
+
+	private $model;
 	
 	public function __construct(){
-		$parametros = array('nombre' => 'Javier', 'apellido' => 'Lerma');
-		$this->render(__CLASS__, $parametros);
+		$this->model = new HomeModel();
 	}
 
-	public function exec(){
-		echo '<h1>Hola mundo!</h1>';	
-  	}
-  	public function saludo(){
-		echo '<h1>Hola GAYS!</h1>';	
-  	}
+	public function exec($parametro){
+		
+	}
+	
+	public function getUser($id)
+	{
+		$user = $this->model->getUser($id);
+		$this->show($user);
+	}
+	
+	public function show($user)
+	{
+		$parametros = array('usuario' => $user['usuario']);
+		$this->render(__CLASS__, $parametros);
+	}
+  	
 }
 
 ?>

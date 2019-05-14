@@ -10,7 +10,7 @@ abstract class Controller{
 
 	public function __construct()
 	{
-		//echo __CLASS__ .' instanciada bebe';
+		//echo __CLASS__ .' instanciada';
 	}
 
 	protected function render($nombre_controlador = '', $parametros = array())
@@ -18,7 +18,7 @@ abstract class Controller{
 		$this->vista = new View($nombre_controlador, $parametros);
 	}
 
-	abstract public function exec();
+	abstract public function exec($paramtro);
 }
 
 ?>

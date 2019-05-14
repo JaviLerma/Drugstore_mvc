@@ -7,8 +7,7 @@
 <body>
 	<div class="container">
 		<div class="jumbotron">
-			<h1>Hola <?php echo $nombre; ?></h1>
-			<h2>Apellido: <?php echo $apellido; ?></h2>
+			<h1>Hola <?php echo $usuario; ?></h1>
 		</div>
 	</div>
 </body>

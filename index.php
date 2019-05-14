@@ -15,9 +15,9 @@
     $metodo = $router->getMethod();
     $parametro = $router->getParam();
 
-    //echo 'Controlador: ' . $controlador . '</br>';
-    //echo 'Metodo: '. $metodo .'</br>';
-    //echo 'Parametro: '.$parametro.'</br>';
+    echo 'Controlador: ' . $controlador . '</br>';
+    echo 'Metodo: '. $metodo .'</br>';
+    echo 'Parametro: '.$parametro.'</br>';
 
     require PATH_CONTROLLERS . "{$controlador}/{$controlador}Controller.php";
 
@@ -25,6 +25,6 @@
 
     $controller = new $controlador();
 
-    //$controller->$metodo();
+    $controller->$metodo($parametro);
 
 ?>
