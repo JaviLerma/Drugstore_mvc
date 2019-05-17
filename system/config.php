@@ -14,6 +14,8 @@ define('PATH_CONTROLLERS', 'app/controllers/');
 //Define ruta de Helpers
 define('HELPER_PATH', 'system/helpers/');
 
+define('PATH_LIBS', 'system/libs/');
+
 define('FOLDER_PATH', '/Drugstore_mvc');
 
 //Define ruta de vistas

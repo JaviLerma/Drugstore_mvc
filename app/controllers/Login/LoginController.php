@@ -3,14 +3,17 @@
 	defined('BASEPATH') or exit('No se permite acceso directo');
 
 	require_once PATH_MODELS . 'Login/LoginModel.php';
+	require_once PATH_LIBS . 'Session.php';
 
 	class LoginController extends Controller
 	{
 		private $model;
+		private $session;
 
 		public function __construct()
 		{
 			$this->model = new LoginModel();
+			$this->session = new Session();
 		}
 
 		public function signin($request_params)
@@ -22,12 +25,15 @@
 				$this->renderErrorMessage('Usuario inexistente');
 			}else{
 			
-				$result = $result->fetch_object();
-				if($request_params['nPassword'] != $result->contrasenia) //tratar de usar password_verity con contreseña encriptada
+				$client = $result->fetch_object();
+				if($request_params['nPassword'] != $client->contrasenia) //tratar de usar password_verity con contreseña encriptada
 				{
 					$this->renderErrorMessage('Contraseña incorrecta');
 				}else{
-					echo "INICIANDO SESION....";
+
+					$this->session->init();
+					$this->session->add('usuario', $client->usuario);
+					header('location: /Drugstore_mvc/main');
 				}
 			}	
 		}
@@ -48,8 +54,5 @@
 		{
 			$this->render(__CLASS__);
 		}
-
-
 	}
-
 ?>

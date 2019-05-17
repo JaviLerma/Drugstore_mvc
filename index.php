@@ -31,5 +31,4 @@
     $controller = new $controlador();
 
     $controller->$metodo($parametro);
-
 ?>
