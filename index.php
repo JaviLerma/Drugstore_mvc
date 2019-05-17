@@ -1,9 +1,8 @@
 <?php
+    define('BASEPATH', true);
     
     require 'system/config.php';
     require 'system/core/autoload.php';
-    //require 'system/core/Router.php';
-    //require 'system/core/Controller.php';
 
     $router = new Router();
 
@@ -15,13 +14,19 @@
     $metodo = $router->getMethod();
     $parametro = $router->getParam();
 
-    echo 'Controlador: ' . $controlador . '</br>';
-    echo 'Metodo: '. $metodo .'</br>';
-    echo 'Parametro: '.$parametro.'</br>';
+    //echo 'Controlador: ' . $controlador . '</br>';
+    //echo 'Metodo: '. $metodo .'</br>';
+    //echo 'Parametro: '.$parametro.'</br>';
+
+    if(!CoreHelper::validateController($controlador))
+        $controlador = 'ErrorPage';
 
     require PATH_CONTROLLERS . "{$controlador}/{$controlador}Controller.php";
 
     $controlador.='Controller';
+
+    if(!CoreHelper::validateMethodController($controlador, $metodo))
+        $metodo = 'exec'; //ejecuta el metodo exec de la clase correspondiente
 
     $controller = new $controlador();
 

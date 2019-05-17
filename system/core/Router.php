@@ -1,4 +1,6 @@
 <?php
+    defined('BASEPATH') or exit('No se permite acceso directo');
+    
     class Router
     {
 
@@ -24,7 +26,10 @@
             $this->method = !empty($this->uri[3]) ? $this->uri[3] : 'exec';
         }
         public function setParam(){
-            $this->param = !empty($this->uri[4]) ? $this->uri[4] : '';
+            if(REQUEST_METHOD === 'POST')
+              $this->param = $_POST;
+            else if (REQUEST_METHOD === 'GET')
+              $this->param = ! empty($this->uri[4]) ? $this->uri[4] : '';
         }
 
         public function getUri(){
@@ -39,5 +44,6 @@
         public function getParam(){
             return $this->param;
         }
+        
     }
 ?>

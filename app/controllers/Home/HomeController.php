@@ -1,4 +1,5 @@
-<?php 	
+<?php
+defined('BASEPATH') or exit('No se permite acceso directo');
 
 require_once PATH_MODELS . 'Home/HomeModel.php';
 
@@ -10,7 +11,7 @@ class HomeController extends Controller{
 		$this->model = new HomeModel();
 	}
 
-	public function exec($parametro){
+	public function exec(){
 		
 	}
 	

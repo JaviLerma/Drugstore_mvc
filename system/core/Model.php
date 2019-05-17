@@ -1,12 +1,12 @@
 <?php 
 
-	/**
-	 * 
-	 */
+	defined('BASEPATH') or exit('No se permite acceso directo');
+	
 	class Model
 	{
         protected $conexiondb;
-		function __construct()
+
+		public function __construct()
 		{
             $this->conexiondb=new mysqli(HOST, USER, PASSWORD, DB);
         	if($this->conexiondb->connect_error){

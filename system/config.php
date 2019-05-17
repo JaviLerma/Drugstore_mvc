@@ -3,11 +3,18 @@
 //Define constaste para la URI
 define('URI', $_SERVER['REQUEST_URI']);
 
+define('REQUEST_METHOD', $_SERVER['REQUEST_METHOD']);
+
 //Define constante de carpeta CORE
 define('CORE', 'system/core/');
 
 //Define ruta de controladores
 define('PATH_CONTROLLERS', 'app/controllers/');
+
+//Define ruta de Helpers
+define('HELPER_PATH', 'system/helpers/');
+
+define('FOLDER_PATH', '/Drugstore_mvc');
 
 //Define ruta de vistas
 define('PATH_VIEWS', 'app/views/');
