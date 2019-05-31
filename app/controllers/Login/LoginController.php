@@ -22,13 +22,13 @@
 
 			if(!$result->num_rows)
 			{
-				$this->renderErrorMessage('Usuario inexistente');
+				$this->renderErrorMessage('Datos incorrectos');
 			}else{
 			
 				$client = $result->fetch_object();
 				if($request_params['nPassword'] != $client->contrasenia) //tratar de usar password_verity con contreseña encriptada
 				{
-					$this->renderErrorMessage('Contraseña incorrecta');
+					$this->renderErrorMessage('Datos incorrectos');
 				}else{
 
 					$this->session->init();
@@ -38,18 +38,12 @@
 			}	
 		}
 
-
-		//public function verify($request_params)
-		//{
-		//	return empty($request_params['nUser']) or empty($request_params['nPassword']);
-		//}
-
 		public function renderErrorMessage($message)
 		{
 			$parametros = array('error_message' => $message);
 			$this->render(__CLASS__, $parametros);
 		}
-
+		
 		public function exec()
 		{
 			$this->render(__CLASS__);
