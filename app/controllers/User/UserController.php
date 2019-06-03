@@ -9,7 +9,6 @@ class UserController extends Controller
     private $session;
     private $model;
     private $params;
-    private $render;
 
     public function __construct()
     {
@@ -22,11 +21,7 @@ class UserController extends Controller
 
     public function exec()
     {
-        //$params = array('usuario' => $this->session->get('usuario'));
-        $this->params["usuario"] = $this->session->get('usuario');
-        $allusers = $this->model->getAll();
-        $this->params["allusers"] = $allusers;
-        //var_dump($this->params);
+        $this->cargaArray();
         $this->render(__CLASS__, $this->params);
     }
 
@@ -39,10 +34,7 @@ class UserController extends Controller
             if ($request_params['pass'] == $request_params['pass2']) {
                 echo "entre";
                 if ($this->model->addUser($request_params)) {
-                    echo "entre2";
-                    $this->params["usuario"] = $this->session->get('usuario');
-                    $allusers = $this->model->getAll();
-                    $this->params["allusers"] = $allusers;
+                    $this->cargaArray();
                     $this->render(__CLASS__, $this->params);
                 } else {
                     $this->renderErrorMessage('No se pudo agregar Usuario');
@@ -63,28 +55,27 @@ class UserController extends Controller
 
     public function renderErrorMessage($message)
     {
-        //$params = array('error_message' => $message, 'usuario' => $this->session->get('usuario'));
+        $this->cargaArray();
         $this->params["error_message"] = $message;
-        $this->params["usuario"] = $this->session->get('usuario');
-        $allusers = $this->model->getAll();
-        $this->params["allusers"] = $allusers;
         $this->render(__CLASS__, $this->params);
-        //var_dump($this->params);
     }
 
     public function deleteById($id)
     {
         if ($this->model->deleteById($id)) {
-            $this->params["usuario"] = $this->session->get('usuario');
-            $allusers = $this->model->getAll();
-            $this->params["allusers"] = $allusers;
+            $this->cargaArray();
             $this->render(__CLASS__, $this->params);
+        }else{
+            renderErrorMessage('Error no se pudo realizar la tarea');
         }
-        //var_dump($resultado);
+
     }
 
-    public function render(){ //function para pasar evitar tener q agregar los elementos del array todas las veces q se tiene q renderizar
-
-
+    public function cargaArray()
+    { //funcion echa para no añadir a cada rato el usuario activo y los usuarios en la lista
+        $this->params = array('usuario' => $this->session->get('usuario'));
+        $allusers = $this->model->getAll();
+        $this->params["allusers"] = $allusers;
+        return $this->params;
     }
 }

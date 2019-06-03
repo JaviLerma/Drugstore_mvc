@@ -91,7 +91,7 @@ class UserModel extends Model
     }
 
     public function deleteById($id){
-        $sql = "DELETE FROM $this->table WHERE id_usuario=$id"; //aca uso $This->table para probar
+        $sql = "DELETE FROM usuarios WHERE id_usuario=$id"; //aca uso $This->table para probar
         $query = $this->conexiondb->query($sql);
         return $query;
     }

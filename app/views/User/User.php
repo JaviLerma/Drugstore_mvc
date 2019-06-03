@@ -69,7 +69,7 @@
   <form action="<?= FOLDER_PATH . '/User/newUser' ?>" method="POST" class="col-lg-5">
     <h3>Añadir usuario</h3>
     <hr />
-    Nombre y Apellido: <input type="text" name="nombre_apellido" class="form-control" required />
+    Nombre y Apellido: <input type="text" name="nombre_apellido" class="form-control" required value="Ingrese 1" onclick="this.value='';" onblur="this.value=(this.value=='')?'Ingrese usuario':this.value;" />
     Usuario: <input type="text" name="usuario" class="form-control" required />
     Contraseña: <input type="password" name="pass" class="form-control" required />
     Repite Contraseña: <input type="password" name="pass2" class="form-control" required />
