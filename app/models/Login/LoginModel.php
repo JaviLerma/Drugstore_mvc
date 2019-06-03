@@ -4,10 +4,10 @@
 
 	class LoginModel extends Model
 	{
-		
-		public function __construct()
+		//private $table;
+		public function __construct($table)
 		{
-			parent::__construct();
+			parent::__construct($table);
 		}
 
 		public function sigIn($nUser)

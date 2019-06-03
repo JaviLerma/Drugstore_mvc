@@ -24,7 +24,6 @@ defined('BASEPATH') or exit('No se permite acceso directo');
 				$this->plantilla = $this->getPlantilla($nombre_archivo);
 				echo $this->plantilla;
 			}else {
-				//echo "WTF!!!";
 				throw new Exception("Error Clase {$this->nombre_controlador} no encontrada");			
 			}
 		}

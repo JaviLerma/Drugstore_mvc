@@ -45,7 +45,7 @@
         <a class="nav-link" href="/Drugstore_mvc/Main">Menu Principal <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/Drugstore_mvc/User">Gesti´n de usuarios</a>
+        <a class="nav-link" href="/Drugstore_mvc/User">Gestión de usuarios</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>

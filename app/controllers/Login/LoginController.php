@@ -12,7 +12,7 @@
 
 		public function __construct()
 		{
-			$this->model = new LoginModel();
+			$this->model = new LoginModel("usuarios");
 			$this->session = new Session();
 		}
 
