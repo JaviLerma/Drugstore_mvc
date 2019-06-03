@@ -28,12 +28,23 @@ class UserController extends Controller
 
     public function newUser($request_params)
     {
-        if ($this->verifyUser($request_params)) {
-            $this->renderErrorMessage('Usuario en USO');
-        } else {
-            if ($request_params['pass'] == $request_params['pass2']) {
-                echo "entre";
+        if (isset($_POST["anadir"])) {
+            if ($this->verifyUser($request_params)) {
+                $this->renderErrorMessage('Usuario en USO');
+            } elseif ($request_params['pass'] == $request_params['pass2']) {
+                $request_params['id_usuario'] = "NULL";
                 if ($this->model->addUser($request_params)) {
+                    $this->cargaArray();
+                    $this->render(__CLASS__, $this->params);
+                } else {
+                    $this->renderErrorMessage('No se pudo agregar Usuario');
+                }
+            } else {
+                $this->renderErrorMessage('Las contraseñas no coiciden');
+            }
+        } elseif (isset($_POST["actualizar"])) {
+            if ($request_params['pass'] == $request_params['pass2']) {
+                if ($this->model->updateUser($request_params)) {
                     $this->cargaArray();
                     $this->render(__CLASS__, $this->params);
                 } else {
@@ -65,17 +76,28 @@ class UserController extends Controller
         if ($this->model->deleteById($id)) {
             $this->cargaArray();
             $this->render(__CLASS__, $this->params);
-        }else{
+        } else {
             renderErrorMessage('Error no se pudo realizar la tarea');
         }
-
     }
 
     public function cargaArray()
     { //funcion echa para no añadir a cada rato el usuario activo y los usuarios en la lista
+
         $this->params = array('usuario' => $this->session->get('usuario'));
         $allusers = $this->model->getAll();
         $this->params["allusers"] = $allusers;
         return $this->params;
+    }
+
+
+    public function modUser($id)
+    {
+        $usuario_mod = $this->model->getById($id);
+        $this->cargaArray();
+        $this->params["usuario_mod"] = $usuario_mod;
+        $this->render(__CLASS__, $this->params);
+        //var_dump($this->params);
+        //echo $this->params["usuario_mod"]->nombre_apellido;
     }
 }

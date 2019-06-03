@@ -20,7 +20,7 @@ class UserModel extends Model
     }
     public function getId()
     {
-        return $this - id_usuario;
+        return $this->id_usuario;
     }
 
     public function setUsuario($user)
@@ -51,7 +51,6 @@ class UserModel extends Model
         $permiso = $parametros['nPermiso'];
         //$id = $this->conexiondb->insert_id;
         $sql = "INSERT INTO usuarios (id_usuarios, usuario, nombre_apellido, contrasenia, permiso) VALUES (" . $id_usuario . ",$usuario, $nombre_apellido, $contrasenia, $permiso)";
-        echo $sql;
     }
 
     public function getUser($nUsuario)
@@ -66,9 +65,26 @@ class UserModel extends Model
     {
         $this->conexiondb->autocommit(false);
         $this->conexiondb->begin_transaction(MYSQLI_TRANS_START_WITH_CONSISTENT_SNAPSHOT);
-        //$id = $this->conexiondb->insert_id;
-        $sql = "INSERT INTO usuarios (nombre_apellido, usuario, contrasenia, permiso) VALUES ('" . $params['nombre_apellido'] . "', '" . $params['usuario'] . "', '" . $params['pass'] . "', 1)";
-        if ($OK = $this->conexiondb->query($sql)) {
+        $sql = "INSERT INTO usuarios (id_usuario, nombre_apellido, usuario, contrasenia, permiso) VALUES (" . $params['id_usuario'] . ", '" . $params['nombre_apellido'] . "', '" . $params['usuario'] . "', '" . $params['pass'] . "', 1)";
+        echo $sql;
+        if ($this->conexiondb->query($sql)) {
+            if ($this->conexiondb->commit())
+                return true;
+            else
+                return false;
+        } else {
+            $this->conexiondb->rollback();
+            return false;
+        }
+        $this->conexiondb->autocommit(true);
+    }
+
+    public function updateUser($params){
+        $this->conexiondb->autocommit(false);
+        $this->conexiondb->begin_transaction(MYSQLI_TRANS_START_WITH_CONSISTENT_SNAPSHOT);
+        $sql = "UPDATE usuarios SET usuario='$params[usuario]', nombre_apellido='$params[nombre_apellido]' WHERE id_usuario=$params[id_usuario]";
+        //echo $sql;
+        if ($this->conexiondb->query($sql)) {
             if ($this->conexiondb->commit())
                 return true;
             else
@@ -89,6 +105,17 @@ class UserModel extends Model
         }
         return $resultSet;
     }
+
+    public function getById($id){
+        $sql = "SELECT * FROM usuarios WHERE id_usuario=$id";
+        $query=$this->conexiondb->query($sql);
+        if($row = $query->fetch_object()) {
+           $resultSet=$row;
+        }
+         
+        return $resultSet;
+    }
+
 
     public function deleteById($id){
         $sql = "DELETE FROM usuarios WHERE id_usuario=$id"; //aca uso $This->table para probar

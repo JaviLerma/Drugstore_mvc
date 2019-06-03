@@ -69,12 +69,20 @@
   <form action="<?= FOLDER_PATH . '/User/newUser' ?>" method="POST" class="col-lg-5">
     <h3>Añadir usuario</h3>
     <hr />
-    Nombre y Apellido: <input type="text" name="nombre_apellido" class="form-control" required value="Ingrese 1" onclick="this.value='';" onblur="this.value=(this.value=='')?'Ingrese usuario':this.value;" />
-    Usuario: <input type="text" name="usuario" class="form-control" required />
+    <?php if (!empty($usuario_mod->usuario)) { ?>
+      ID: <input type="text" name="id_usuario" class="form-control" value='<?php !empty($usuario_mod->id_usuario) ? print($usuario_mod->id_usuario) : ''; ?>' ; />
+    <?php } ?>
+    Nombre y Apellido: <input type="text" name="nombre_apellido" class="form-control" required value='<?php !empty($usuario_mod->nombre_apellido) ? print($usuario_mod->nombre_apellido) : ''; ?>' ; />
+    Usuario: <input type="text" name="usuario" class="form-control" required value='<?php !empty($usuario_mod->usuario) ? print($usuario_mod->usuario) : ''; ?>' ; />
     Contraseña: <input type="password" name="pass" class="form-control" required />
     Repite Contraseña: <input type="password" name="pass2" class="form-control" required />
-    <div style='color:red'><?php !empty($error_message) ? print($error_message) : '' ; ?></div>
-    <input type="submit" value="Añadir" class="btn btn-success" />
+    <div style='color:red'><?php !empty($error_message) ? print($error_message) : ''; ?></div>
+    <?php if (!empty($usuario_mod->usuario)) { ?>
+      <input type="submit" value="Actualizar" name="actualizar" class="btn btn-success" />
+    <?php } else { ?>
+      <input type="submit" value="Añadir" name="anadir" class="btn btn-success" />
+    <?php } ?>
+
     <hr />
     <hr />
   </form>
@@ -99,18 +107,15 @@
           <td><?php echo $user->usuario; ?></td>
           <td>
             <div class="right">
-              <a href="#" class="btn btn-danger">Modificar</a>
+              <a href="<?= FOLDER_PATH . '/User/modUser' ?>/<?php echo $user->id_usuario; ?>" class="btn btn-danger">Modificar</a>
             </div>
           </td>
           <td>
             <div class="right">
-            <a href="<?= FOLDER_PATH . '/User/deleteById' ?>/<?php echo $user->id_usuario; ?>" class="btn btn-danger">Borrar</a>
+              <a href="<?= FOLDER_PATH . '/User/deleteById' ?>/<?php echo $user->id_usuario; ?>" class="btn btn-danger">Borrar</a>
             </div>
           </td>
-          
         </tr>
-
-
       <?php } ?>
     </table>
 
