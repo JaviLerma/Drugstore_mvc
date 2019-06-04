@@ -50,10 +50,10 @@
         <li class="nav-item">
           <a class="nav-link" href="/Drugstore_mvc/Main">Menu Principal <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="/Drugstore_mvc/User">Gestión de usuarios</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="/Drugstore_mvc/Cliente">Gestión de Clientes</a>
         </li>
         <li class="nav-item">
@@ -69,16 +69,15 @@
   </nav>
   <hr />
   <hr />
-  <form action="<?= FOLDER_PATH . '/User/newUser' ?>" method="POST" class="col-lg-5">
-    <h3>Gestion de Usuario</h3>
+  <form action="<?= FOLDER_PATH . '/Cliente/newCliente' ?>" method="POST" class="col-lg-5">
+    <h3>Gestión de Clientes</h3>
     <hr />
     <?php if (!empty($usuario_mod->usuario)) { ?>
-      ID: <input type="text" name="id_usuario" class="form-control" value='<?php !empty($usuario_mod->id_usuario) ? print($usuario_mod->id_usuario) : ''; ?>' ; />
+      ID: <input type="text" name="id_cliente" class="form-control" value='<?php !empty($usuario_mod->id_usuario) ? print($usuario_mod->id_usuario) : ''; ?>' ; />
     <?php } ?>
     Nombre y Apellido: <input type="text" name="nombre_apellido" class="form-control" required value='<?php !empty($usuario_mod->nombre_apellido) ? print($usuario_mod->nombre_apellido) : ''; ?>' ; />
-    Usuario: <input type="text" name="usuario" class="form-control" required value='<?php !empty($usuario_mod->usuario) ? print($usuario_mod->usuario) : ''; ?>' ; />
-    Contraseña: <input type="password" name="pass" class="form-control" required />
-    Repite Contraseña: <input type="password" name="pass2" class="form-control" required />
+    DNI: <input type="text" name="dni" class="form-control" required value='<?php !empty($usuario_mod->usuario) ? print($usuario_mod->usuario) : ''; ?>' ; />
+    Teléfono: <input type="text" name="telefono" class="form-control" required />
     <div style='color:red'><?php !empty($error_message) ? print($error_message) : ''; ?></div>
     <?php if (!empty($usuario_mod->usuario)) { ?>
       <input type="submit" value="Actualizar" name="actualizar" class="btn btn-success" />
@@ -89,7 +88,7 @@
   </form>
   <aside>
     <div class="col-lg-5">
-      <h3>Usuarios</h3>
+      <h3>Clientes</h3>
       <hr />
     </div>
 
@@ -98,15 +97,16 @@
         <tr>
           <td>ID</td>
           <td>Nombre y Apellido</td>
-          <td>Usuario</td>
+          <td>DNI</td>
+          <td>Teléfono</td>
         </tr>
 
-
-        <?php foreach ($allusers as $user) { ?>
-          <tr>
+        <tr>
+          <?php foreach ($allusers as $user) { ?>
             <td><?php echo $user->id_usuario; ?></td>
             <td><?php echo $user->nombre_apellido; ?></td>
             <td><?php echo $user->usuario; ?></td>
+            <td></td>
             <td>
               <div class="right">
                 <a href="<?= FOLDER_PATH . '/User/modUser' ?>/<?php echo $user->id_usuario; ?>" class="btn btn-danger">Modificar</a>
@@ -114,7 +114,7 @@
             </td>
             <td>
               <div class="right">
-                <a href="<?= FOLDER_PATH . '/User/deleteById' ?>/<?php echo $user->id_usuario; ?>" class="btn btn-danger">Eliminar</a>
+                <a href="<?= FOLDER_PATH . '/User/deleteById' ?>/<?php echo $user->id_usuario; ?>" class="btn btn-danger">Borrar</a>
               </div>
             </td>
           </tr>
@@ -123,4 +123,5 @@
     </section>
   </aside>
 </body>
+
 </html>

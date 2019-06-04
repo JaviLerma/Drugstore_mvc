@@ -1,89 +1,67 @@
 <?php
 
-class UserModel extends Model
+class ClienteModel extends Model
 {
-    private $usuario;
-    private $id_usuario;
+    private $id_cliente;
     private $nombre_apellido;
-    private $contrasenia;
-    private $permiso;
+    private $dni;
+    private $telefono;
 
 
     public function __construct()
     {
-        parent::__construct("usuarios");
+        parent::__construct();
     }
 
     public function setId($id)
     {
-        $this->id_usuario = $id;
+        $this->id_cliente = $id;
     }
     public function getId()
     {
-        return $this->id_usuario;
+        return $this->id_cliente;
     }
 
-    public function setUsuario($user)
+    public function setNombre($cliente)
     {
-        $this->usuario = $user;
+        $this->nombre_apellido = $cliente;
     }
 
-    public function getUsuario()
-    {
-        return $this->usuario;
-    }
-
-    public function setNom($nombre)
-    {
-        $this->nombre_apellido = $nombre;
-    }
-    public function getNom()
+    public function getNombre()
     {
         return $this->nombre_apellido;
     }
 
-    public function setUser($parametros)
+    public function setDni($dni)
     {
-        $id_usuario = $parametros['nId_usuario'];
-        $usuario = $parametros['nUsuario'];
-        $nombre_apellido = $parametros['nNombre_apellido'];
-        $contrasenia = $parametros['nContrasenia'];
-        $permiso = $parametros['nPermiso'];
-        //$id = $this->conexiondb->insert_id;
-        $sql = "INSERT INTO usuarios (id_usuarios, usuario, nombre_apellido, contrasenia, permiso) VALUES (" . $id_usuario . ",$usuario, $nombre_apellido, $contrasenia, $permiso)";
+        $this->dni = $dni;
+    }
+    public function getDni()
+    {
+        return $this->dni;
+    }
+    public function setTel($tel)
+    {
+        $this->telefono = $tel;
+    }
+    public function getTel()
+    {
+        return $this->telefono;
     }
 
-    public function getUser($nUsuario)
+    public function getCliente($dni)
     {
-        $user = $this->conexiondb->real_escape_string($nUsuario);
-        $sql = "SELECT * FROM usuarios WHERE usuario = '{$nUsuario}'";
+        $dni = $this->conexiondb->real_escape_string($dni);
+        $sql = "SELECT * FROM clientes WHERE dni = '{$dni}'";
         return $this->conexiondb->query($sql);
         //echo $sql;
     }
 
-    public function addUser($params)
+    public function addCliente($params)
     {
         $this->conexiondb->autocommit(false);
         $this->conexiondb->begin_transaction(MYSQLI_TRANS_START_WITH_CONSISTENT_SNAPSHOT);
-        $sql = "INSERT INTO usuarios (id_usuario, nombre_apellido, usuario, contrasenia, permiso) VALUES (" . $params['id_usuario'] . ", '" . $params['nombre_apellido'] . "', '" . $params['usuario'] . "', '" . $params['pass'] . "', 1)";
-        //echo $sql;
-        if ($this->conexiondb->query($sql)) {
-            if ($this->conexiondb->commit())
-                return true;
-            else
-                return false;
-        } else {
-            $this->conexiondb->rollback();
-            return false;
-        }
-        $this->conexiondb->autocommit(true); //por mas q este despues de los return funciona
-    }
-
-    public function updateUser($params)
-    {
-        $this->conexiondb->autocommit(false);
-        $this->conexiondb->begin_transaction(MYSQLI_TRANS_START_WITH_CONSISTENT_SNAPSHOT);
-        $sql = "UPDATE usuarios SET usuario='$params[usuario]', nombre_apellido='$params[nombre_apellido]' WHERE id_usuario=$params[id_usuario]";
+        $sql = "INSERT INTO clientes (nombre_apellido, dni, telefono) VALUES ('" . $params['nombre_apellido'] . "', '" . $params['dni'] . "', '" . $params['telefono'] . "')";
         //echo $sql;
         if ($this->conexiondb->query($sql)) {
             if ($this->conexiondb->commit()) {
@@ -93,6 +71,23 @@ class UserModel extends Model
                 $this->conexiondb->rollback();
                 return false;
             }
+        } else {
+            $this->conexiondb->rollback();
+            return false;
+        }
+    }
+
+    public function updateUser($params)
+    {
+        $this->conexiondb->autocommit(false);
+        $this->conexiondb->begin_transaction(MYSQLI_TRANS_START_WITH_CONSISTENT_SNAPSHOT);
+        $sql = "UPDATE usuarios SET usuario='$params[usuario]', nombre_apellido='$params[nombre_apellido]' WHERE id_usuario=$params[id_usuario]";
+        //echo $sql;
+        if ($this->conexiondb->query($sql)) {
+            if ($this->conexiondb->commit())
+                return true;
+            else
+                return false;
         } else {
             $this->conexiondb->rollback();
             return false;
@@ -120,7 +115,6 @@ class UserModel extends Model
 
         return $resultSet;
     }
-
 
     public function deleteById($id)
     {

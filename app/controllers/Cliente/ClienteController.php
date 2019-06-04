@@ -1,9 +1,9 @@
 <?php
 
-require_once PATH_MODELS . 'User/UserModel.php';
+require_once PATH_MODELS . 'Cliente/ClienteModel.php';
 require_once PATH_LIBS . 'Session.php';
 
-class UserController extends Controller
+class ClienteController extends Controller
 {
     private $usuario;
     private $session;
@@ -12,7 +12,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->model = new UserModel();
+        $this->model = new ClienteModel();
         $this->session = new Session();
         $this->session->init();
         if (!$this->session->getStatus() === 2 || empty($this->session->get('usuario')))
@@ -25,39 +25,32 @@ class UserController extends Controller
         $this->render(__CLASS__, $this->params);
     }
 
-    public function newUser($request_params)
+    public function newCliente($request_params)
     {
         if (isset($_POST["anadir"])) {
-            if ($this->verifyUser($request_params)) {
-                $this->renderErrorMessage('Usuario en USO');
-            } elseif ($request_params['pass'] == $request_params['pass2']) {
-                $request_params['id_usuario'] = "NULL";
-                if ($this->model->addUser($request_params)) {
+            if ($this->verifyCliente($request_params)) {
+                $this->renderErrorMessage('Cliente ya existente');
+            } else {
+                if ($this->model->addCliente($request_params)) {
                     $this->cargaArray();
                     $this->render(__CLASS__, $this->params);
                 } else {
-                    $this->renderErrorMessage('No se pudo agregar Usuario');
+                    $this->renderErrorMessage('No se pudo agregar Cliente');
                 }
-            } else {
-                $this->renderErrorMessage('Las contraseñas no coiciden');
             }
         } elseif (isset($_POST["actualizar"])) {
-            if ($request_params['pass'] == $request_params['pass2']) {
-                if ($this->model->updateUser($request_params)) {
-                    $this->cargaArray();
-                    $this->render(__CLASS__, $this->params);
-                } else {
-                    $this->renderErrorMessage('No se pudo agregar Usuario');
-                }
+            if ($this->model->updateCliente($request_params)) {
+                $this->cargaArray();
+                $this->render(__CLASS__, $this->params);
             } else {
-                $this->renderErrorMessage('Las contraseñas no coiciden');
+                $this->renderErrorMessage('No se pudo actualizar Cliente');
             }
         }
     }
 
-    public function verifyUser($request_params)
+    public function verifyCliente($request_params)
     {
-        $result = $this->model->getUser($request_params['usuario']);
+        $result = $this->model->getCliente($request_params['dni']);
         if ($result->num_rows)
             return true;
         return false;
@@ -89,8 +82,7 @@ class UserController extends Controller
         return $this->params;
     }
 
-
-    public function modUser($id)
+    public function modCliente($id)
     {
         $usuario_mod = $this->model->getById($id);
         $this->cargaArray();

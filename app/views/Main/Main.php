@@ -48,6 +48,9 @@
         <a class="nav-link" href="/Drugstore_mvc/User">Gestión de usuarios</a>
       </li>
       <li class="nav-item">
+          <a class="nav-link" href="/Drugstore_mvc/User">Gestión de Clientes</a>
+        </li>
+      <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>
     </ul>
