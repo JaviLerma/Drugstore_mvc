@@ -79,7 +79,8 @@ class UserModel extends Model
         $this->conexiondb->autocommit(true);
     }
 
-    public function updateUser($params){
+    public function updateUser($params)
+    {
         $this->conexiondb->autocommit(false);
         $this->conexiondb->begin_transaction(MYSQLI_TRANS_START_WITH_CONSISTENT_SNAPSHOT);
         $sql = "UPDATE usuarios SET usuario='$params[usuario]', nombre_apellido='$params[nombre_apellido]' WHERE id_usuario=$params[id_usuario]";
@@ -106,21 +107,22 @@ class UserModel extends Model
         return $resultSet;
     }
 
-    public function getById($id){
+    public function getById($id)
+    {
         $sql = "SELECT * FROM usuarios WHERE id_usuario=$id";
-        $query=$this->conexiondb->query($sql);
-        if($row = $query->fetch_object()) {
-           $resultSet=$row;
+        $query = $this->conexiondb->query($sql);
+        if ($row = $query->fetch_object()) {
+            $resultSet = $row;
         }
-         
+
         return $resultSet;
     }
 
 
-    public function deleteById($id){
+    public function deleteById($id)
+    {
         $sql = "DELETE FROM usuarios WHERE id_usuario=$id"; //aca uso $This->table para probar
         $query = $this->conexiondb->query($sql);
         return $query;
     }
-
 }

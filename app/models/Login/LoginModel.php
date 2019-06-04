@@ -1,7 +1,4 @@
 <?php 
-	
-	
-
 	class LoginModel extends Model
 	{
 		//private $table;
@@ -17,5 +14,4 @@
 			return $this->conexiondb->query($sql);
 		}
 	}
-
 ?>
