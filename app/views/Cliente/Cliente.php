@@ -8,7 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-  <title>Menu Principal</title>
+  <title>Gestión de Clientes</title>
 
   <style>
     .bd-placeholder-img {
@@ -57,6 +57,9 @@
           <a class="nav-link" href="/Drugstore_mvc/Cliente">Gestión de Clientes</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/Drugstore_mvc/Proveedor">Gestión de Proveedores</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
         </li>
       </ul>
@@ -72,18 +75,19 @@
   <form action="<?= FOLDER_PATH . '/Cliente/newCliente' ?>" method="POST" class="col-lg-5">
     <h3>Gestión de Clientes</h3>
     <hr />
-    <?php if (!empty($usuario_mod->usuario)) { ?>
-      ID: <input type="text" name="id_cliente" class="form-control" value='<?php !empty($usuario_mod->id_usuario) ? print($usuario_mod->id_usuario) : ''; ?>' ; />
+    <?php if (!empty($cliente_mod->id_cliente)) { ?>
+      ID: <input type="text" name="id_cliente" class="form-control" value='<?php !empty($cliente_mod->id_cliente) ? print($cliente_mod->id_cliente) : ''; ?>' ; />
     <?php } ?>
-    Nombre y Apellido: <input type="text" name="nombre_apellido" class="form-control" required value='<?php !empty($usuario_mod->nombre_apellido) ? print($usuario_mod->nombre_apellido) : ''; ?>' ; />
-    DNI: <input type="text" name="dni" class="form-control" required value='<?php !empty($usuario_mod->usuario) ? print($usuario_mod->usuario) : ''; ?>' ; />
-    Teléfono: <input type="text" name="telefono" class="form-control" required />
+    Nombre y Apellido: <input type="text" name="nombre_apellido" class="form-control" required value='<?php !empty($cliente_mod->nombre_apellido) ? print($cliente_mod->nombre_apellido) : ''; ?>' ; />
+    DNI: <input type="text" name="dni" class="form-control" required value='<?php !empty($cliente_mod->dni) ? print($cliente_mod->dni) : ''; ?>' ; />
+    Teléfono: <input type="text" name="telefono" class="form-control" required value='<?php !empty($cliente_mod->telefono) ? print($cliente_mod->telefono) : ''; ?>' ; />
     <div style='color:red'><?php !empty($error_message) ? print($error_message) : ''; ?></div>
-    <?php if (!empty($usuario_mod->usuario)) { ?>
+    <?php if (!empty($cliente_mod->id_cliente)) { ?>
       <input type="submit" value="Actualizar" name="actualizar" class="btn btn-success" />
     <?php } else { ?>
       <input type="submit" value="Añadir" name="anadir" class="btn btn-success" />
     <?php } ?>
+    <a href="<?= FOLDER_PATH . '/Cliente' ?>" class="btn btn-danger">Limpiar</a>
     <hr />
   </form>
   <aside>
@@ -102,19 +106,20 @@
         </tr>
 
         <tr>
-          <?php foreach ($allusers as $user) { ?>
-            <td><?php echo $user->id_usuario; ?></td>
-            <td><?php echo $user->nombre_apellido; ?></td>
-            <td><?php echo $user->usuario; ?></td>
+          <?php foreach ($allclientes as $cliente) { ?>
+            <td><?php echo $cliente->id_cliente; ?></td>
+            <td><?php echo $cliente->nombre_apellido; ?></td>
+            <td><?php echo $cliente->dni; ?></td>
+            <td><?php echo $cliente->telefono; ?></td>
             <td></td>
             <td>
               <div class="right">
-                <a href="<?= FOLDER_PATH . '/User/modUser' ?>/<?php echo $user->id_usuario; ?>" class="btn btn-danger">Modificar</a>
+                <a href="<?= FOLDER_PATH . '/Cliente/modCliente' ?>/<?php echo $cliente->id_cliente; ?>" class="btn btn-danger">Modificar</a>
               </div>
             </td>
             <td>
               <div class="right">
-                <a href="<?= FOLDER_PATH . '/User/deleteById' ?>/<?php echo $user->id_usuario; ?>" class="btn btn-danger">Borrar</a>
+                <a href="<?= FOLDER_PATH . '/Cliente/deleteById' ?>/<?php echo $cliente->id_cliente; ?>" class="btn btn-danger">Borrar</a>
               </div>
             </td>
           </tr>

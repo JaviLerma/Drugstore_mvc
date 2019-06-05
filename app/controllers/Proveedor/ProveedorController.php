@@ -1,19 +1,25 @@
 <?php
 
-require_once PATH_MODELS . 'Cliente/ClienteModel.php';
+require_once PATH_MODELS . 'Proveedor/ProveedorModel.php';
 require_once PATH_LIBS . 'Session.php';
 
-class ClienteController extends Controller
+class ProveedorController extends Controller
 {
-    private $usuario;
-    private $session;
+    //atributos de la tabla Proveedor
+    private $id_proveedor;
+    private $nombre_proveedor;
+    private $telefono;
+    private $direccion;
+    private $localidad;
+    private $provincia;
+    private $mail;
+
     private $model;
-    private $params;
 
     public function __construct()
     {
-        $this->model = new ClienteModel();
-        $this->session = new Session();
+        $this->model = new ProveedorModel();
+        $this->session = new Session(); //verificar si es nesesario hacer esto en cada clase
         $this->session->init();
         if (!$this->session->getStatus() === 2 || empty($this->session->get('usuario')))
             exit('Acceso denegado');
@@ -25,32 +31,32 @@ class ClienteController extends Controller
         $this->render(__CLASS__, $this->params);
     }
 
-    public function newCliente($request_params)
+    public function newProveedor($request_params)
     {
         if (isset($_POST["anadir"])) {
-            if ($this->verifyCliente($request_params)) {
-                $this->renderErrorMessage('Cliente ya existente');
+            if ($this->verifyProveedor($request_params)) {
+                $this->renderErrorMessage('Proveedor ya existente');
             } else {
-                if ($this->model->addCliente($request_params)) {
+                if ($this->model->addProveedor($request_params)) {
                     $this->cargaArray();
                     $this->render(__CLASS__, $this->params);
                 } else {
-                    $this->renderErrorMessage('No se pudo agregar Cliente');
+                    $this->renderErrorMessage('No se pudo agregar Proveedor');
                 }
             }
         } elseif (isset($_POST["actualizar"])) {
-            if ($this->model->updateCliente($request_params)) {
+            if ($this->model->updateProveedor($request_params)) {
                 $this->cargaArray();
                 $this->render(__CLASS__, $this->params);
             } else {
-                $this->renderErrorMessage('No se pudo actualizar Cliente');
+                $this->renderErrorMessage('No se pudo actualizar Proveedor');
             }
         }
     }
 
-    public function verifyCliente($request_params)
+    public function verifyProveedor($request_params)
     {
-        $result = $this->model->getCliente($request_params['dni']);
+        $result = $this->model->getProveedor($request_params['nombre_proveedor']);
         if ($result->num_rows)
             return true;
         return false;
@@ -63,13 +69,13 @@ class ClienteController extends Controller
         $this->render(__CLASS__, $this->params);
     }
 
-    public function deleteById($id)
+    public function deleteById($id) //Tratar de realizar funciones "genericas" como ésta para todo.
     {
         if ($this->model->deleteById($id)) {
             $this->cargaArray();
             $this->render(__CLASS__, $this->params);
         } else {
-            renderErrorMessage('No se pudo borrar al cliente'); //aca se puede agregar el nombre del cliente a borrar
+            renderErrorMessage('No se pudo borrar al Proveedor'); //aca se puede agregar el nombre del Proveedor a borrar
         }
     }
 
@@ -77,16 +83,16 @@ class ClienteController extends Controller
     { //funcion echa para no añadir a cada rato el usuario activo y los usuarios en la lista
 
         $this->params = array('usuario' => $this->session->get('usuario')); //asigna usuario activo
-        $allclientes = $this->model->getAll();
-        $this->params["allclientes"] = $allclientes;
+        $allProveedores = $this->model->getAll();
+        $this->params["allproveedores"] = $allProveedores;
         return $this->params;
     }
 
-    public function modCliente($id)
+    public function modProveedor($id)
     {
-        $cliente_mod = $this->model->getById($id);
+        $proveedor_mod = $this->model->getById($id);
         $this->cargaArray();
-        $this->params["cliente_mod"] = $cliente_mod;
+        $this->params["proveedor_mod"] = $proveedor_mod;
         $this->render(__CLASS__, $this->params);
         //var_dump($this->params);
         //echo $this->params["usuario_mod"]->nombre_apellido;
