@@ -12,6 +12,11 @@
 <br>-Falta realizar borrado y modificacion x TRANSACCION
 <br>-Error donde se muestra la lista de clientes, usuarios, proveedores, etc cuando la tabla esta vacia
 <br>-La funcion DELETEBYID, es la mejor, la mas facil de adaptar a otras tablas, tratar de hacer las demas asi
-<br>-
+<br>
 
 
+Se accede desde http://localhost/Drugstore_mvc/login
+<br>
+usuario: admin
+<br>
+contraseña : 1234
