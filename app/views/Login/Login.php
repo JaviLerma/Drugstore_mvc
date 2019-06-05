@@ -71,8 +71,6 @@
   <input type="password" id="idPassword" name="nPassword" class="form-control" placeholder="Contraseña" required>
   <?php !empty($error_message) ? print($error_message) : '' ; ?>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesion</button>
-  
-  <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p> 
 </form>
 </body>
 </html>
