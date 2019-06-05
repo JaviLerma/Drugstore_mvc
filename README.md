@@ -1,6 +1,6 @@
 # Drugstore_mvc
 
-##TODO:
+## TODO:
 
 <br>-Verificar si existe una session activa
 <br>-Resolver si usar español o ingles
