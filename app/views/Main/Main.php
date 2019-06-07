@@ -50,7 +50,7 @@
           <a class="nav-link" href="/Drugstore_mvc/User">Gestión de usuarios</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/Drugstore_mvc/Ciente">Gestión de Clientes</a>
+          <a class="nav-link" href="/Drugstore_mvc/Cliente">Gestión de Clientes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/Drugstore_mvc/Proveedor">Gestión de Proveedores</a>
