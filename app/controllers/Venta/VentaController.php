@@ -2,20 +2,22 @@
 
 require_once PATH_MODELS . 'Venta/VentaModel.php';
 require_once PATH_MODELS . 'Cliente/ClienteModel.php';
+require_once PATH_MODELS . 'Articulo/ArticuloModel.php';
 require_once PATH_LIBS . 'Session.php';
 
-class UserController extends Controller
+class VentaController extends Controller
 {
     private $usuario;
     private $cliente;
+    private $articulo;
     private $session;
-    private $model;
     private $params;
 
     public function __construct()
     {
-        $this->model = new UserModel();
+        $this->cliente = new UserModel();
         $this->session = new Session();
+        $this->articulo = new ArticuloModel();
         $this->session->init();
         if (!$this->session->getStatus() === 2 || empty($this->session->get('usuario')))
             exit('Acceso denegado');
@@ -90,8 +92,8 @@ class UserController extends Controller
     { //funcion echa para no añadir a cada rato el usuario activo y los usuarios en la lista
 
         $this->params = array('usuario' => $this->session->get('usuario'));
-        $allusers = $this->model->getAll();
-        $this->params["allusers"] = $allusers;
+        $allarticulos = $this->articulo->getAll();
+        $this->params["allarticulos"] = $allarticulos;
         return $this->params;
     }
 
@@ -104,5 +106,12 @@ class UserController extends Controller
         $this->render(__CLASS__, $this->params);
         //var_dump($this->params);
         //echo $this->params["usuario_mod"]->nombre_apellido;
+    }
+
+    public function getCliente($id){
+        $cliente = $this->cliente->getById($id);
+        $this->cargaArray();
+        $this->params["cliente"] = $cliente;
+        $this->render(__CLASS__, $this->params);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class UserModel extends Model
+class ArticuloModel extends Model
 {
     private $usuario;
     private $id_usuario;
@@ -102,7 +102,7 @@ class UserModel extends Model
 
     public function getAll()
     {
-        $sql = "SELECT * FROM usuarios";
+        $sql = "SELECT * FROM articulos";
         $query = $this->conexiondb->query($sql);
         while ($row = $query->fetch_object()) {
             $resultSet[] = $row;
@@ -112,11 +112,12 @@ class UserModel extends Model
 
     public function getById($id)
     {
-        $sql = "SELECT * FROM clientes WHERE id_cliente=$id";
+        $sql = "SELECT * FROM usuarios WHERE id_usuario=$id";
         $query = $this->conexiondb->query($sql);
         if ($row = $query->fetch_object()) {
             $resultSet = $row;
         }
+
         return $resultSet;
     }
 

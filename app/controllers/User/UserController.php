@@ -13,7 +13,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->model = new UserModel();
-        $this->session = new Session();
+        $this->session = new Session(); //
         $this->session->init();
         if (!$this->session->getStatus() === 2 || empty($this->session->get('usuario')))
             exit('Acceso denegado');

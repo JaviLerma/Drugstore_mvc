@@ -56,6 +56,9 @@
           <a class="nav-link" href="/Drugstore_mvc/Proveedor">Gestión de Proveedores</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/Drugstore_mvc/Venta">Venta</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
         </li>
       </ul>

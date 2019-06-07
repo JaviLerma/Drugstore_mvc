@@ -48,7 +48,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/Drugstore_mvc/Main">Menu Principal <span class="sr-only">(current)</span></a> 
+          <a class="nav-link" href="/Drugstore_mvc/Main">Menu Principal <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/Drugstore_mvc/User">Gestión de usuarios</a>
@@ -76,75 +76,26 @@
   <hr />
   <hr />
   <form action="<?= FOLDER_PATH . '/Proveedor/newProveedor' ?>" method="POST" class="col-lg-5">
-    <h3>Gestión de Proveedores</h3>
+    <h3>Venta</h3>
     <hr />
-    <?php if (!empty($proveedor_mod->id_proveedor)) { ?>
-      ID: <input type="text" name="id_proveedor" class="form-control" value='<?php !empty($proveedor_mod->id_proveedor) ? print($proveedor_mod->id_proveedor) : ''; ?>' ; />
+    <?php if (!empty($cliente->id_cliente)) { ?>
+      ID: <input type="text" name="id_cliente" class="form-control" value='<?php !empty($cliente->id_cliente) ? print($cliente->id_cliente) : ''; ?>' ; />
     <?php } ?>
+    Nombre y Apellido: <input type="text" name="nombre_apellido" class="form-control" required value='<?php !empty($cliente->nombre_apellido) ? print($cliente->nombre_apellido) : ''; ?>' ; />
+    DNI: <input type="text" name="dni" class="form-control" required value='<?php !empty($cliente->dni) ? print($cliente->dni) : ''; ?>' ; />
+    Teléfono: <input type="text" name="telefono" class="form-control" required value='<?php !empty($cliente->telefono) ? print($cliente->telefono) : ''; ?>' ; />
 
-    Nombre Proveedor: <input type="text" name="nombre_proveedor" class="form-control" required value='<?php !empty($proveedor_mod->nombre_proveedor) ? print($proveedor_mod->nombre_proveedor) : ''; ?>' ; />
-
-    Teléfono: <input type="text" name="telefono" class="form-control" required value='<?php !empty($proveedor_mod->telefono) ? print($proveedor_mod->telefono) : ''; ?>' ; />
-    
-    Direccion: <input type="text" name="direccion" class="form-control" required value='<?php !empty($proveedor_mod->direccion) ? print($proveedor_mod->direccion) : ''; ?>' ; />
-    
-    Localidad: <input type="text" name="localidad" class="form-control" required value='<?php !empty($proveedor_mod->localidad) ? print($proveedor_mod->localidad) : ''; ?>' ; />
-
-    Provincia: <input type="text" name="provincia" class="form-control" required value='<?php !empty($proveedor_mod->provincia) ? print($proveedor_mod->provincia) : ''; ?>' ; />
-
-    Correo: <input type="email" name="mail" class="form-control" required value='<?php !empty($proveedor_mod->mail) ? print($proveedor_mod->mail) : ''; ?>' ; />
-    
-    <div style='color:red'><?php !empty($error_message) ? print($error_message) : ''; ?></div>
-    <?php if (!empty($proveedor_mod->id_proveedor)) { ?>
-      <input type="submit" value="Actualizar" name="actualizar" class="btn btn-success" />
-    <?php } else { ?>
-      <input type="submit" value="Añadir" name="anadir" class="btn btn-success" />
-    <?php } ?>
-    <a href="<?= FOLDER_PATH . '/Proveedor' ?>" class="btn btn-danger">Limpiar</a>
     <hr />
   </form>
   <aside>
-    <div class="col-lg-7">
-      <h3>Proveedores</h3>
-      <hr />
-    </div>
-
-    <section class="col-lg-7 usuario" style="height:450px;overflow-y:scroll;">
-      <table>
-        <tr>
-          <td>ID</td>
-          <td>Nombre Proveedor</td>
-          <td>Teléfono</td>
-          <td>Direccion</td>
-          <td>Localidad</td>
-          <td>Provincia</td>
-          <td>Correo</td>
-        </tr>
-
-        <tr>
-          <?php foreach ($allproveedores as $proveedor) { ?>
-            <td><?php echo $proveedor->id_proveedor; ?></td>
-            <td><?php echo $proveedor->nombre_proveedor; ?></td>
-            <td><?php echo $proveedor->telefono; ?></td>
-            <td><?php echo $proveedor->direccion; ?></td>
-            <td><?php echo $proveedor->localidad; ?></td>
-            <td><?php echo $proveedor->provincia; ?></td>
-            <td><?php echo $proveedor->mail; ?></td>
-            <td></td>
-            <td>
-              <div class="right">
-                <a href="<?= FOLDER_PATH . '/Proveedor/modProveedor' ?>/<?php echo $proveedor->id_proveedor; ?>" class="btn btn-danger">Modificar</a>
-              </div>
-            </td>
-            <td>
-              <div class="right">
-                <a href="<?= FOLDER_PATH . '/Proveedor/deleteById' ?>/<?php echo $proveedor->id_proveedor; ?>" class="btn btn-danger">Borrar</a>
-              </div>
-            </td>
-          </tr>
+    <div class="mdl-textfield mdl-js-textfield">
+      <select class="mdl-textfield__input">
+        <option value="" disabled="" selected="">Selecciones Productos</option>
+        <?php foreach ($allarticulos as $articulo) { ?>
+          <option value=""><?php echo $articulo->nombre_articulo; ?></option>
         <?php } ?>
-      </table>
-    </section>
+      </select>
+    </div>
   </aside>
 </body>
 

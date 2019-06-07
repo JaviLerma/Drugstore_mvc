@@ -124,7 +124,7 @@
             </td>
             <td>
               <div class="right">
-                <a href="<?= FOLDER_PATH . '/Venta/idCliente' ?>/<?php echo $cliente->id_cliente; ?>" class="btn btn-danger">Vender</a>
+                <a href="<?= FOLDER_PATH . '/Venta/getCliente' ?>/<?php echo $cliente->id_cliente; ?>" class="btn btn-danger">Vender</a>
               </div>
             </td>
           </tr>
