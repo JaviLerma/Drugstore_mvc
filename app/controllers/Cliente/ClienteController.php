@@ -73,6 +73,7 @@ class ClienteController extends Controller
         }
     }
 
+
     public function cargaArray()
     { //funcion echa para no añadir a cada rato el usuario activo y los usuarios en la lista
 

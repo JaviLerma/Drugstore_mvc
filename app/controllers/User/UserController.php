@@ -54,7 +54,7 @@ class UserController extends Controller
             }
         }
     }
-
+    
     public function verifyUser($request_params)
     {
         $result = $this->model->getUser($request_params['usuario']);

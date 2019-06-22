@@ -40,40 +40,11 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#"><?= $usuario ?></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/Drugstore_mvc/Main">Menu Principal <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/Drugstore_mvc/User">Gestión de usuarios</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/Drugstore_mvc/Cliente">Gestión de Clientes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/Drugstore_mvc/Proveedor">Gestión de Proveedores</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="/Drugstore_mvc/main/logout">Cerrar Sesion</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+
   <hr />
   <hr />
   <form action="<?= FOLDER_PATH . '/Cliente/newCliente' ?>" method="POST" class="col-lg-5">
-    <h3>Gestión de Clientes</h3>
+    <h3>Venta</h3>
     <hr />
     <?php if (!empty($cliente_mod->id_cliente)) { ?>
       ID: <input type="text" name="id_cliente" class="form-control" value='<?php !empty($cliente_mod->id_cliente) ? print($cliente_mod->id_cliente) : ''; ?>' ; />
@@ -114,15 +85,10 @@
             <td></td>
             <td>
               <div class="right">
-                <a href="<?= FOLDER_PATH . '/Cliente/modCliente' ?>/<?php echo $cliente->id_cliente; ?>" class="btn btn-warning">Modificar</a>
+                <a href="<?= FOLDER_PATH . '/Cliente/modCliente' ?>/<?php echo $cliente->id_cliente; ?>" class="btn btn-danger">Modificar</a>
               </div>
             </td>
-            <td>
-              <div class="right">
-                <a href="<?= FOLDER_PATH . '/Cliente/deleteById' ?>/<?php echo $cliente->id_cliente; ?>" class="btn btn-danger">Borrar</a>
-              </div>
-            </td>
-            
+
           </tr>
         <?php } ?>
       </table>

@@ -112,12 +112,11 @@ class ArticuloModel extends Model
 
     public function getById($id)
     {
-        $sql = "SELECT * FROM usuarios WHERE id_usuario=$id";
+        $sql = "SELECT * FROM articulos WHERE id_articulo=$id";
         $query = $this->conexiondb->query($sql);
         if ($row = $query->fetch_object()) {
             $resultSet = $row;
         }
-
         return $resultSet;
     }
 

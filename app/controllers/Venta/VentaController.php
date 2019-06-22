@@ -15,7 +15,7 @@ class VentaController extends Controller
 
     public function __construct()
     {
-        $this->cliente = new UserModel();
+        $this->cliente = new ClienteModel();
         $this->session = new Session();
         $this->articulo = new ArticuloModel();
         $this->session->init();
@@ -94,6 +94,8 @@ class VentaController extends Controller
         $this->params = array('usuario' => $this->session->get('usuario'));
         $allarticulos = $this->articulo->getAll();
         $this->params["allarticulos"] = $allarticulos;
+        $allclientes = $this->cliente->getAll();
+        $this->params["allclientes"] = $allclientes;
         return $this->params;
     }
 
@@ -113,5 +115,21 @@ class VentaController extends Controller
         $this->cargaArray();
         $this->params["cliente"] = $cliente;
         $this->render(__CLASS__, $this->params);
+    }
+
+    public function getArticulo($id){
+        
+        $this->cargaArray();
+        $result[] = $this->articulo->getById($id);
+        $this->params["detalles"] = $result;
+        var_dump($result);
+        //var_dump($this->params);
+        $this->render(__CLASS__, $this->params);
+    }
+
+    public function facturar(){
+
+        
+
     }
 }

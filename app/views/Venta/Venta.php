@@ -75,28 +75,145 @@
   </nav>
   <hr />
   <hr />
+  <h2>Venta</h2>
+  <hr />
+  <h3>Cliente</h3>
   <form action="<?= FOLDER_PATH . '/Proveedor/newProveedor' ?>" method="POST" class="col-lg-5">
-    <h3>Venta</h3>
-    <hr />
+
     <?php if (!empty($cliente->id_cliente)) { ?>
       ID: <input type="text" name="id_cliente" class="form-control" value='<?php !empty($cliente->id_cliente) ? print($cliente->id_cliente) : ''; ?>' ; />
     <?php } ?>
     Nombre y Apellido: <input type="text" name="nombre_apellido" class="form-control" required value='<?php !empty($cliente->nombre_apellido) ? print($cliente->nombre_apellido) : ''; ?>' ; />
     DNI: <input type="text" name="dni" class="form-control" required value='<?php !empty($cliente->dni) ? print($cliente->dni) : ''; ?>' ; />
     Teléfono: <input type="text" name="telefono" class="form-control" required value='<?php !empty($cliente->telefono) ? print($cliente->telefono) : ''; ?>' ; />
-
-    <hr />
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+      Buscar Cliente
+    </button>
   </form>
-  <aside>
-    <div class="mdl-textfield mdl-js-textfield">
-      <select class="mdl-textfield__input">
-        <option value="" disabled="" selected="">Selecciones Productos</option>
-        <?php foreach ($allarticulos as $articulo) { ?>
-          <option value=""><?php echo $articulo->nombre_articulo; ?></option>
-        <?php } ?>
-      </select>
+  <hr />
+  <hr />
+  <h3>Productos</h3>
+  <hr />
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">
+    Buscar Productos
+  </button>
+  <hr />
+  <table>
+    <tr>
+      <td>
+        <h5>Articulos</h5>
+      </td>
+      <td>
+        <h5>Precio</h5>
+      </td>
+      <td>
+        <h5>Cantidad</h5>
+      </td>
+      <td>
+        <h5>Subtotal</h5>
+      </td>
+    </tr>
+    <?php foreach ($allarticulos as $i) { ?>
+      <tr>
+        <form oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+          <td><input type="text" id="narticulo" value="<?php echo $i->nombre_articulo; ?>"></td>
+          <td><input type="text" id="a" value="<?php echo $i->precio; ?>"></td>
+          <td><input type="number" id="b"></td>
+          <td>
+            <output name="x" for="a b"></output>
+          </td>
+        </form>
+      </tr>
+    <?php } ?>
+  </table>
+  <td>
+    <div class="right">
+      <a href="<?= FOLDER_PATH . '/Cliente/deleteById' ?>/<?php echo $cliente->id_cliente; ?>" class="btn btn-danger">Borrar</a>
     </div>
-  </aside>
+  </td>
 </body>
+
+<div class="container">
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Seleccionar Cliente</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <table>
+            <tr>
+              <td>ID</td>
+              <td>Nombre y Apellido</td>
+              <td>DNI</td>
+              <td>Teléfono</td>
+            </tr>
+
+            <tr>
+              <?php foreach ($allclientes as $cliente) { ?>
+                <td><?php echo $cliente->id_cliente; ?></td>
+                <td><?php echo $cliente->nombre_apellido; ?></td>
+                <td><?php echo $cliente->dni; ?></td>
+                <td><?php echo $cliente->telefono; ?></td>
+                <td></td>
+                <td>
+                  <div class="right">
+                    <a href="<?= FOLDER_PATH . '/Venta/getCliente' ?>/<?php echo $cliente->id_cliente; ?>" class="btn btn-success">Seleccionar</a>
+                  </div>
+                </td>
+
+              </tr>
+            <?php } ?>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- The Modal -->
+  <div class="modal" id="myModal1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Seleccionar Producto</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+
+
+        <!-- Modal footer -->
+        <div class="modal-footer modal-sm">
+          <table>
+            <tr>
+              <td>Articulo</td>
+            </tr>
+            <?php foreach ($allarticulos as $articulo) { ?>
+              <tr>
+                <td><?php echo $articulo->nombre_articulo; ?></td>
+                <td>-</td>
+                <td>
+                  <a href="<?= FOLDER_PATH . '/Venta/getArticulo' ?>/<?php echo $articulo->id_articulo; ?>" class="btn btn-success">Seleccionar</a>
+                </td>
+              </tr>
+            <?php } ?>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 
 </html>
