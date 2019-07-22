@@ -20,3 +20,5 @@ Se accede desde http://localhost/Drugstore_mvc/login
 usuario: admin
 <br>
 contraseña : 1234
+
+https://github.com/cruizg93/CristianRuizBlog-LoginForm
