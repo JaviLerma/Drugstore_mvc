@@ -113,7 +113,7 @@
         <h5>Subtotal</h5>
       </td>
     </tr>
-    <?php foreach ($allarticulos as $i) { ?>
+    <?php foreach ($detalles as $i) { ?>
       <tr>
         <form oninput="x.value=parseInt(a.value)+parseInt(b.value)">
           <td><input type="text" id="narticulo" value="<?php echo $i->nombre_articulo; ?>"></td>

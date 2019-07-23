@@ -12,6 +12,7 @@ class VentaController extends Controller
     private $articulo;
     private $session;
     private $params;
+    private $result;
 
     public function __construct()
     {
@@ -120,9 +121,9 @@ class VentaController extends Controller
     public function getArticulo($id){
         
         $this->cargaArray();
-        $result[] = $this->articulo->getById($id);
-        $this->params["detalles"] = $result;
-        var_dump($result);
+        $this->result[] = $this->articulo->getById($id);
+        $this->params["detalles"] = $this->result;
+        var_dump($this->result);
         //var_dump($this->params);
         $this->render(__CLASS__, $this->params);
     }
